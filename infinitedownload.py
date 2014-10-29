@@ -8,10 +8,6 @@ PORT = 8080
 length = 2**20
 random = True
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((HOST, PORT))
-s.listen(1)
-
 def humanreadable(num, speed=False):
     def output(n, u): return '{:.2f} {}'.format(n, u)
     division = 1000 if speed else 1024
@@ -43,6 +39,9 @@ def send_shit(connection, address):
                 ))
 
 if __name__ == '__main__':
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind((HOST, PORT))
+    s.listen(1)
     http_response = b'HTTP/1.0 200 OK\ncontent-type: application/octet-stream\n\n\n'
     while True:
         conn, addr = s.accept()
