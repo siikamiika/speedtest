@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import socket
 import os
 from threading import Thread
@@ -40,6 +42,7 @@ def send_shit(connection, address):
 
 if __name__ == '__main__':
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((HOST, PORT))
     s.listen(1)
     http_response = b'HTTP/1.0 200 OK\ncontent-type: application/octet-stream\n\n\n'
